@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= data.name %></title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>User ID</td>
+        <td><%= data.id %></td>
+      </tr>
+      <tr>
+        <td>User Name</td>
+        <td><%= data.name %></td>
+      </tr>
+      <tr>
+        <td>Current Balance</td>
+        <td><%= data.current_balance %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td><%= data.time %></td>
+      </tr>
+      <tr>
+    </table>
+    <br>
+    <a>Service Type   Previous Balance   Change Amount  Current Balance  Date </a>
+    <tbody>
+      <% records.reverse().forEach(function(records) { %>
+        <tr>
+          <br>
+          <td><%= records.service_type %></td>
+          <td><%= records.previous_balance %></td>
+          <td><%= records.change_amount %></td>
+          <td><%= records.current_balance %></td>
+          <td><%= records.time %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+    <br>
+    <a href="/users">Go back to users page.</a>
+  </body>
+</html>
