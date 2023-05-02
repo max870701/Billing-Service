@@ -82,6 +82,8 @@ mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("Successfully connected to MongoDB Atlas Cluster.");
@@ -98,6 +100,11 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/signup', signupRouter);
 
+// catch /favicon.ico with 1x1 transparent GIF
+app.get("/favicon.ico", (req, res) => {
+  res.setHeader("Content-Type", "image/gif");
+  res.send(Buffer.from("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", "base64"));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
