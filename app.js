@@ -1,3 +1,5 @@
+// Import configuration in .env file
+require('dotenv').config();
 // Import Basic Packages
 const createError = require('http-errors');
 const express = require('express');
@@ -66,19 +68,26 @@ const loginverify = (req, res, next) => {
   }
 };
 
+// Import MongoDB parameters
+const dbName = process.env.DB_NAME;
+const dbHost = process.env.DB_HOST;
+const dbUserName = process.env.DB_USER_NAME;
+const dbPassword = process.env.DB_PASSWORD;
+// Set the URI of MongoDB Atlas
+const uri = `mongodb+srv://${dbUserName}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
 // Disable the use of deprecated methods in MongoDB's driver.
 mongoose.set("useFindAndModify", false);
 
 mongoose
-  .connect("mongodb://localhost:27017/billingDB", {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Successfully connected to mongoDB.");
+    console.log("Successfully connected to MongoDB Atlas Cluster.");
   })
   .catch((e) => {
-    console.log("Connection failed.");
+    console.log("MongoDB Atlas Cluster Connection Failed.");
     console.log(e);
   });
 
