@@ -8,13 +8,9 @@ const logger = require('morgan');
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const crypto = require("crypto");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 // Import Modules
-const User = require("./routes/models/user");
-const Record = require("./routes/models/record");
-const Admin = require("./routes/models/admin");
 const randomGenerator = require("./routes/utils/randomGenerator");
 // Import Routers
 const indexRouter = require('./routes/index');

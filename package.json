@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  "author": "Cheng-Yu Hsieh",
+  "author": "Cheng-Yu Hsieh, Zhao Song, Qiu Lin",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "debug": "~2.6.9",
