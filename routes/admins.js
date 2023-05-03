@@ -105,7 +105,6 @@ router.post("/create", async (req, res) => {
       console.log("user and record not accepted.");
       console.log(e);
       await session.abortTransaction();
-
       res.render("reject");
     } finally {
       session.endSession();

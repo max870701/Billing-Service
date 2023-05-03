@@ -3,9 +3,20 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <!-- Add Login Button -->
+    <div class="container" styl="margin: 0 auto">
+      <div class="row justify-content-between align-items-center">
+	<div class="col-md-auto">
+	  <h1><%= title %></h1>
+          <p>Welcome to <%= title %></p>
+	</div>
+        <div class="col-md-2">
+	  <a href="/login" class="btn btn-primary btn-block">Login</a>
+	</div>
+      </div>
+    </div>
   </body>
 </html>

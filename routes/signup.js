@@ -9,7 +9,11 @@ router.get("/", (req, res) => {
   });
 
 router.post("/", async(req, res) => {
-    let {username , password} = req.body
+    let {username , password, confirmPassword} = req.body
+    // Check if password matches confirmPassword
+    if (password !== confirmPassword) {
+      res.status(400).send('Passwords do not match.');
+    }
     // Generate a random salt value
     let salt = randomGenerator();
     // Encrypt the password with salt
@@ -19,7 +23,7 @@ router.post("/", async(req, res) => {
     if(!foundUser){
       let newAdmin = new Admin({username , salt, userhash})
       newAdmin.save().then(() =>{
-        res.send("Signup successfully , This is Homepage of Billing Service.");
+        res.send("Signup successfully");
       }).catch(()=>{
         res.send("Error!")
       })

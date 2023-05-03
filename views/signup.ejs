@@ -4,14 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signup</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
   </head>
   <body>
-    <form action="/signup" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" />
-      <label for="name">password:</label>
-      <input type="password" id="password" name="password" />
-      <button>signup</button>
-    </form>
+    <div class="container">
+      <div class="row">
+        <!-- Adjust Layout -->
+	<div class="col-md-3 offset-md-4">
+	  <form class="form-signup" action="/signup" method="POST">
+            <!-- Can add some images -->
+            <h1 class="h3 mb-3 font-weight-normal">Sign in your admin account</h1>
+            <label for="username" class="sr-only">Admin name</label>
+            <input type="text" id="username" name="username" class="form-control" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+            <label for="confirmPassword">Confirm Password</label>
+	    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+	    
+            <script>
+              // Get password and confirm password fields
+              const passwordField = document.querySelector('#password');
+              const confirmPasswordField = document.querySelector('#confirmPassword');
+              // Add event listener to confirm password field
+              confirmPasswordField.addEventListener('input', function() {
+                // Check if passwords match
+                if (passwordField.value === confirmPasswordField.value) {
+                  // Passwords match, remove error message
+                  confirmPasswordField.setCustomValidity('');
+                } else {
+                  // Passwords don't match, show error message
+                  confirmPasswordField.setCustomValidity('Passwords do not match');
+                }
+	      });
+            </script>
+            <br>
+	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+	    <br>
+	    <p>Already have an account? <a href="/login" >Login here</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

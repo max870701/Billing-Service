@@ -11,15 +11,15 @@ router.post("/", async(req, res) => {
     let {username , password} = req.body
     let foundUser = await Admin.findOne({username : username})
     if (!foundUser){
-    res.send("UserName incorrect")
+      res.render('login-error', { error: "Username or password incorrect" });
     }else{
     if(validatePassword(password, foundUser.userhash, foundUser.salt)){
         req.session.isVerifed = true
         console.log(req.session.isVerifed)
         console.log(req.cookies)
-        res.send("Login successfully");
+	res.render('login-accept', { username: username });
     }else{
-        res.send("Password incorrect")
+        res.render('login-error', { error: "Username or password incorrect" });
     }
     }
 });

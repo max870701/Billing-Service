@@ -51,6 +51,22 @@
       </tbody>
     </table>
     <br>
-    <a href="/users" class="btn btn-primary">Go back to users page</a>
+    <div class="btn-group">
+      <a id="users-list" href="/users" class="btn btn-primary">Go back to users page</a>
+      <a id="operation" href="/users/operation" class="btn btn-primary">Go to operation page</a>
+      <a id="link-edit" href="/users/edit/<%= data.id %>" class="btn btn-primary">Edit username</a>
+      <a id="link-delete" href="/users/delete/<%= data.id %>" class="btn btn-primary">DELETE USER</a>
+      <script>
+        /*
+	const jsonData = <%- JSON.stringify(data) %>;
+        const dataObj = JSON.parse(jsonData);
+        var userID = Number(dataObj.id);
+        var linkEdit = document.getElementById("link-edit");
+        var linkDelete = document.getElementById("link-delete");
+        linkEdit.href += userID;
+        linkDelete.href += userID;
+	*/
+      </script>
+    </div>
   </body>
 </html>

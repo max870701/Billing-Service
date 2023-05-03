@@ -75,8 +75,6 @@ const dbUserName = process.env.DB_USER_NAME;
 const dbPassword = process.env.DB_PASSWORD;
 // Set the URI of MongoDB Atlas
 const uri = `mongodb+srv://${dbUserName}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
-// Disable the use of deprecated methods in MongoDB's driver.
-mongoose.set("useFindAndModify", false);
 
 mongoose
   .connect(uri, {
