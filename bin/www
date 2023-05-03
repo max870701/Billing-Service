@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('billingservice:server');
-var http = require('http');
+//var http = require('http');
 var https = require('https');
 var fs = require('fs');
 /**
@@ -17,10 +17,10 @@ var fs = require('fs');
 //var port = normalizePort(process.env.PORT || '3000');
 
 // HTTP setting
-var httpPort = normalizePort('3000');
+//var port = normalizePort('3000');
 
 // HTTPS setting
-var httpsPort = normalizePort('8443');
+var port = normalizePort('8443');
 var privateKey = fs.readFileSync(process.env.PATH_KEY, 'utf8');
 var certificate = fs.readFileSync(process.env.PATH_CERT, 'utf-8');
 
@@ -36,27 +36,27 @@ var credentials = {
  * Create HTTP server.
  */
 
-var httpServer = http.createServer(app);
+//var server = http.createServer(app);
 
 /**
  * Create HTTPS server.
  */
-var httpsServer = https.createServer(credentials, app);
+var server = https.createServer(credentials, app);
 
 
 /**
  * HTTP server listen on provided port, on all network interfaces
  */
-httpServer.listen(httpPort);
-//httpServer.on('error', onError);
-//httpServer.on('listening', onListening);
+//server.listen(httpPort);
+//server.on('error', onError);
+//server.on('listening', onListening);
 
 /**
  * HTTPS server listen on provided port, on all network interfaces
  */
-httpsServer.listen(httpsPort);
-//httpsServer.on('error', onError);
-//httpsServer.on('listening', onListening);
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Listen on provided port, on all network interfaces.
