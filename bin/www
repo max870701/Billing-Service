@@ -7,27 +7,65 @@
 var app = require('../app');
 var debug = require('debug')('billingservice:server');
 var http = require('http');
-
+var https = require('https');
+var fs = require('fs');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+// Default HTTP
+//var port = normalizePort(process.env.PORT || '3000');
+
+// HTTP setting
+var httpPort = normalizePort('3000');
+
+// HTTPS setting
+var httpsPort = normalizePort('8443');
+var privateKey = fs.readFileSync(process.env.PATH_KEY, 'utf8');
+var certificate = fs.readFileSync(process.env.PATH_CERT, 'utf-8');
+
+var credentials = {
+  key: privateKey,
+  cert: certificate
+};
+
+
+// app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var httpServer = http.createServer(app);
+
+/**
+ * Create HTTPS server.
+ */
+var httpsServer = https.createServer(credentials, app);
+
+
+/**
+ * HTTP server listen on provided port, on all network interfaces
+ */
+httpServer.listen(httpPort);
+//httpServer.on('error', onError);
+//httpServer.on('listening', onListening);
+
+/**
+ * HTTPS server listen on provided port, on all network interfaces
+ */
+httpsServer.listen(httpsPort);
+//httpsServer.on('error', onError);
+//httpsServer.on('listening', onListening);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+/*
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+*/
 
 /**
  * Normalize a port into a number, string, or false.
