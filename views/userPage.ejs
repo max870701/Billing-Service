@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= data.name %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/basic-table.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
   </head>
   <body>
     <table>
@@ -26,20 +28,29 @@
       <tr>
     </table>
     <br>
-    <a>Service Type   Previous Balance   Change Amount  Current Balance  Date </a>
-    <tbody>
-      <% records.reverse().forEach(function(records) { %>
+    <table>
+      <thead>
         <tr>
-          <br>
-          <td><%= records.service_type %></td>
-          <td><%= records.previous_balance %></td>
-          <td><%= records.change_amount %></td>
-          <td><%= records.current_balance %></td>
-          <td><%= records.time %></td>
+          <th>Service Type</th>
+	  <th>Previous Balance</th>
+	  <th>Change Amount</th>
+	  <th>Current Balance</th>
+	  <th>Date</th>
         </tr>
-      <% }); %>
-    </tbody>
+      </thead>
+      <tbody>
+        <% records.reverse().forEach(function(records) { %>
+          <tr>
+            <td><%= records.service_type %></td>
+            <td><%= records.previous_balance %></td>
+            <td><%= records.change_amount %></td>
+            <td><%= records.current_balance %></td>
+            <td><%= records.time %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
     <br>
-    <a href="/users">Go back to users page.</a>
+    <a href="/users" class="btn btn-primary">Go back to users page</a>
   </body>
 </html>

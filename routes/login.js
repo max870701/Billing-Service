@@ -17,7 +17,7 @@ router.post("/", async(req, res) => {
         req.session.isVerifed = true
         console.log(req.session.isVerifed)
         console.log(req.cookies)
-        res.send("Login successfully , This is Homepage of Billing Service.");
+        res.send("Login successfully");
     }else{
         res.send("Password incorrect")
     }

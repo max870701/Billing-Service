@@ -4,14 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
   </head>
   <body>
-    <form action="/login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" />
-        <label for="name">password:</label>
-        <input type="password" id="password" name="password" />
-      <button>Login</button>
-    </form>
+    <div class="container"> 
+      <div class="row">
+	<!-- Adjust Layout -->
+	<div class="col-md-3 offset-md-4">		
+          <form class="form-signin" action="/login" method="POST">
+	    <!-- Can add some images -->
+	    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+	    <label for="username" class="sr-only">User name</label>
+	    <input type="text" id="username" name="username" class="form-control" placeholder="User name" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+	    <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" name="remember-me" value="1"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+	    <p>Don't have an account? <a href="/signup" >Sign up here</a></p>
+          </form>
+	</div>
+      </div>
+    </div>
   </body>
 </html>

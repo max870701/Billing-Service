@@ -4,12 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Users Page</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/basic-table.css">
   </head>
   <body>
-    <ul>
-      <% data.forEach(user => { %>
-      <li><a href="/users/<%= user.id %>"><%= user.id %><%= user.name %></a></li>
-      <% }) %>
-    </ul>
+    <table>
+      <thead>
+	<tr>
+          <th>User ID</th>
+	  <th>Name</th>
+	  <th>Current Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+	  <% data.sort((a, b) => a.id - b.id).forEach((user) => { %>
+	    <tr>
+	      <td><%= user.id %></td>
+	      <td><a href="/users/<%= user.id %>" class="btn btn-primary"><%= user.name %></a></td>
+	      <td><%= user.current_balance %></td>
+	    </tr>
+          <% }); %>
+      </tbody>
+    </table>
   </body>
 </html>
