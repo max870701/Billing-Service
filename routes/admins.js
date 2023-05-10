@@ -100,12 +100,12 @@ router.post("/create", async (req, res) => {
       await session.commitTransaction();
 
       console.log("user and record accepted.");
-      res.render("accept");
+      res.render("userCreate-accept");
     } catch (e) {
       console.log("user and record not accepted.");
       console.log(e);
       await session.abortTransaction();
-      res.render("reject");
+      res.render("userCreate-error");
     } finally {
       session.endSession();
     }
@@ -168,25 +168,26 @@ router.post("/operation", async (req, res) => {
   }
 });
 
-router.delete("/users/delete/:id", (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   let { id } = req.params;
-  console.log(id)
-  User.deleteOne({ id })
-    .then((meg) => {
-      console.log(meg);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-    Record.deleteMany({ id })
-    .then((meg) => {
-      console.log(meg);
-      res.send("Record and user Deleted successfully.");
-    })
-    .catch((e) => {
-      console.log(e);
-      res.send("Record and user  Delete failed.");
-    });
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  
+   try {
+    await User.deleteOne({ id: id }, { session });
+    await Record.deleteMany({ id: id }, { session });
+
+    await session.commitTransaction();
+    
+    console.log("Record and user Deleted successfully.");
+    res.send("Record and user Deleted successfully.");
+   } catch (e) {
+    await session.abortTransaction();
+    console.log("Record and user Delete failed.");
+    res.send(e);
+   } finally {
+    session.endSession();
+  }
 });
 
 module.exports = router;

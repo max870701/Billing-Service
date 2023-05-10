@@ -8,6 +8,11 @@
   <body>
     <h1>Login Successfully!</h1>
     <h1>Welcome back <%= username %></h1>
-    <a href="/users">Go back to users page.</a>
+    <a href="/users">Go back to users page in 5 seconds.</a>
+    <script>
+      setTimeout(function() {
+      window.location = '/users';
+      }, 5000);
+    </script>
   </body>
 </html>

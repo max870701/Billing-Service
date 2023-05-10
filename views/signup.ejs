@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signup</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
@@ -16,11 +17,51 @@
             <h1 class="h3 mb-3 font-weight-normal">Sign in your admin account</h1>
             <label for="username" class="sr-only">Admin name</label>
             <input type="text" id="username" name="username" class="form-control" required autofocus>
-            <label for="password" class="sr-only">Password</label>
+	    <span id="username-status"></span>
+	    <script>
+	      function debounce(func, wait) {
+                let timeout;
+		return function() {
+		    const context = this;
+	            const args = arguments;
+	            const later = function() {
+		        timeout = null;
+			func.apply(context, args);
+		    };
+		    clearTimeout(timeout);
+		    timeout = setTimeout(later, wait);
+
+		};
+	      }
+
+              $(document).ready(function() {
+                  const checkUsername = debounce(function() {
+	              const username = $('#username').val();
+
+	              // Prevent Empty Input
+                      if (username.trim() === '') {
+                          $('#username-status').text('');
+                          return; 
+		      }
+
+                      $.get('/signup/check-adminname', { username: username }, function(result) {
+                          if (result === 'available') {
+                              $('#username-status').text('You can use this name.');
+                          } else {
+                              $('#username-status').text('This name is used.')
+		          }
+                      });
+                  }, 500); // Trigger after the user stopped entering
+
+                  $('#username').on('input', checkUsername);
+              });
+	    </script>
+
+	    <br>
+	    <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" required>
             <label for="confirmPassword">Confirm Password</label>
 	    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
-	    
             <script>
               // Get password and confirm password fields
               const passwordField = document.querySelector('#password');

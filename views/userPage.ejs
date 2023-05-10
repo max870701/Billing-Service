@@ -6,6 +6,7 @@
     <title><%= data.name %></title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/basic-table.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   </head>
   <body>
     <table>
@@ -55,18 +56,27 @@
       <a id="users-list" href="/users" class="btn btn-primary">Go back to users page</a>
       <a id="operation" href="/users/operation" class="btn btn-primary">Go to operation page</a>
       <a id="link-edit" href="/users/edit/<%= data.id %>" class="btn btn-primary">Edit username</a>
-      <a id="link-delete" href="/users/delete/<%= data.id %>" class="btn btn-primary">DELETE USER</a>
-      <script>
-        /*
-	const jsonData = <%- JSON.stringify(data) %>;
-        const dataObj = JSON.parse(jsonData);
-        var userID = Number(dataObj.id);
-        var linkEdit = document.getElementById("link-edit");
-        var linkDelete = document.getElementById("link-delete");
-        linkEdit.href += userID;
-        linkDelete.href += userID;
-	*/
-      </script>
+      <button id="delete-button" data-id="<%= data.id %>" class="btn btn-primary">DELETE USER</a>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#delete-button').on('click', function () {
+                const userId = $(this).attr('data-id');
+
+                $.ajax({
+                  url: '/users/delete/' + userId + '?_method=DELETE',
+                  type: 'POST',
+                  success: function (result) {
+                    alert('User deleted successfully');
+                    window.location = '/users';
+                  },
+                  error: function (xhr, status, error) {
+                    alert('Deleting user failed');
+                  }
+                });
+            });
+         });
+    </script>
   </body>
 </html>

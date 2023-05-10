@@ -6,12 +6,11 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Login Error!</h1>
-    <h1><%= error %></h1>
-    <a href="/login">Go back to login page in 5 seconds.</a>
+    <h1>Delete User Failed!</h1>
+    <a href="/users">Go back to users page in 5 seconds.</a>
     <script>
       setTimeout(function() {
-      window.location = '/login';
+      window.location = '/users';
       }, 5000);
     </script>
 
