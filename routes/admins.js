@@ -19,9 +19,9 @@ router.get("/create", (req, res) => {
   res.render("userCreate");
 });
 
-router.get("/operation", (req, res) => {
-  res.render("userOperation");
-});
+//router.get("/operation", (req, res) => {
+  //res.render("userOperation");
+//});
 
 router.get("/:id", async (req, res) => {
   let { id } = req.params;
@@ -112,17 +112,30 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.post("/operation", async (req, res) => {
-  let { id, name, service_type, change_amount } = req.body;
+router.get("/operation/:id", async (req, res) => {
+  let { id } = req.params;
+  try {
+    let user = await User.findOne({ id: id });
+    if (user !== null) {
+      res.render("userOperation", { user });
+    } else {
+      res.send("Cannot find user.");
+    }
+  } catch {
+    res.send("Error!");
+  }
+});
+
+router.post("/operation/:id", async (req, res) => {
+  let { id } = req.params;
+  let { service_type, change_amount } = req.body;
   const session = await mongoose.startSession();
   session.startTransaction();
-
   try {
-    const user = await User.findOne({ id });
+    let user = await User.findOne({ id: id });
     if (!user) {
       throw new Error("User not found");
     }
-    
     const previous_balance = Number(user.current_balance);
     change_amount = Number(change_amount);
     let current_balance;

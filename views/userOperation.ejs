@@ -4,18 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add new Operation</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/basic-table.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
   </head>
   <body>
-    <form action="/users/operation" method="POST">
-      <label for="id">ID:</label>
-      <input type="number" id="id" name="id" />
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" />
-      <label for="service_type">Service Type:</label>
-      <input type="text" id="service_type" name="service_type" />
-      <label for="change_amount">Amount:</label>
-      <input type="number" id="change_amount" name="change_amount" />
-      <button>Submit</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User ID</th>
+	  <th>User Name</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>      
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="row g-3" action="/users/operation/<%= user.id %>" method="POST">
+      <div class="col-md-6">
+        <label for="service_type" class="form-label">Service Type:</label>
+        <select id="service_type" name="service_type" class="form-select">
+          <option value="Deposit">Deposit</option>
+          <option value="Credit">Credit</option>
+          <option value="Withdraw">Withdraw</option>
+          <option value="Billing">Billing</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="change_amount" class="form-label">Amount:</label>
+        <input type="number" id="change_amount" name="change_amount" class="form-control" />
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </form>
   </body>
 </html>

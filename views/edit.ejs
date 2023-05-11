@@ -4,14 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/basic-table.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
   </head>
   <body>
-    <a>Edit User Info</a>
-    <!-- form method can only post and get, so we import method-override middleware in app.js-->
-    <form action="/users/edit/<%= data.id %>?_method=PUT" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" value="<%= data.name %>" />
-      <button>Submit</button>
+    <form action="/users/edit/<%= data.id %>?_method=PUT" method="POST" class="row g-3">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" value="<%= data.name %>" class="form-control" />
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </form>
   </body>
 </html>

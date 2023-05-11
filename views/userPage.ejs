@@ -54,7 +54,7 @@
     <br>
     <div class="btn-group">
       <a id="users-list" href="/users" class="btn btn-primary">Go back to users page</a>
-      <a id="operation" href="/users/operation" class="btn btn-primary">Go to operation page</a>
+      <a id="operation" href="/users/operation/<%= data.id %>" class="btn btn-primary">Go to operation page</a>
       <a id="link-edit" href="/users/edit/<%= data.id %>" class="btn btn-primary">Edit username</a>
       <button id="delete-button" data-id="<%= data.id %>" class="btn btn-primary">DELETE USER</a>
     </div>
