@@ -91,7 +91,7 @@ mongoose
     console.log(e);
   });
 
-// Use routers to handle different API requests
+// Mounting routers to handle different API requests
 app.use('/', indexRouter);
 app.use('/users', loginverify, adminsRouter);
 app.use('/login', loginRouter);

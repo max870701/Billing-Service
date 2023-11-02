@@ -20,41 +20,40 @@
 	    <span id="username-status"></span>
 	    <script>
 	      function debounce(func, wait) {
-                let timeout;
-		return function() {
-		    const context = this;
-	            const args = arguments;
-	            const later = function() {
-		        timeout = null;
-			func.apply(context, args);
-		    };
-		    clearTimeout(timeout);
-		    timeout = setTimeout(later, wait);
-
-		};
+          let timeout;
+		      return function() {
+		        const context = this;
+	          const args = arguments;
+	          const later = function() {
+		          timeout = null;
+			        func.apply(context, args);
+		        };
+		        clearTimeout(timeout);
+		        timeout = setTimeout(later, wait);
+		      };
 	      }
 
-              $(document).ready(function() {
-                  const checkUsername = debounce(function() {
-	              const username = $('#username').val();
+        $(document).ready(function() {
+          const checkUsername = debounce(function() {
+            const username = $('#username').val();
 
-	              // Prevent Empty Input
-                      if (username.trim() === '') {
-                          $('#username-status').text('');
-                          return; 
-		      }
+            // Prevent Empty Input
+            if (username.trim() === '') {
+              $('#username-status').text('');
+              return; 
+            }
 
-                      $.get('/signup/check-adminname', { username: username }, function(result) {
-                          if (result === 'available') {
-                              $('#username-status').text('You can use this name.');
-                          } else {
-                              $('#username-status').text('This name is used.')
-		          }
-                      });
-                  }, 500); // Trigger after the user stopped entering
+            $.get('/signup/check-adminname', { username: username }, function(result) {
+              if (result === 'available') {
+                $('#username-status').text('You can use this name.');
+              } else {
+                $('#username-status').text('This name is used.');
+              }
+            });
+          }, 500); // Trigger after the user stopped entering
 
-                  $('#username').on('input', checkUsername);
-              });
+          $('#username').on('input', checkUsername);
+        });
 	    </script>
 
 	    <br>
@@ -76,7 +75,7 @@
                   // Passwords don't match, show error message
                   confirmPasswordField.setCustomValidity('Passwords do not match');
                 }
-	      });
+	            });
             </script>
             <br>
 	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
